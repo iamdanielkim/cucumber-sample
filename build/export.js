@@ -3,7 +3,7 @@ var http = require("http")
   , fs = require("fs")
 
 var target= process.argv[3] || "http://127.0.0.1:5000"
-var dest = process.argv[2] || "../src/test/resources/features/"
+var dest = process.argv[2] || "./src/test/resources/features/"
 
 console.log(dest);
 
@@ -26,7 +26,7 @@ function get(feature){
   http.get(target + feature.url + "?format=raw", function(res) {
     res.on('data', function (chunk) {
 
-      fs.writeFile(dest + feature.title.split(' ').join('_') + ".feature", chunk, function(err) {
+      fs.writeFile(dest + feature.title + ".feature", chunk, function(err) {
         console.log('######### ' + feature.url + "\n");
         if(err) {
           console.log(err);
